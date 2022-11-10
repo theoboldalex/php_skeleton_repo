@@ -4,3 +4,4 @@ vendor/
 .vscode/*
 .idea/*
 .phpcs-cache
+.DS_Store
