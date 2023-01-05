@@ -5,3 +5,4 @@ vendor/
 .idea/*
 .phpcs-cache
 .DS_Store
+**/.DS_Store

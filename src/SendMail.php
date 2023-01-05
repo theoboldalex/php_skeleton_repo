@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace App;
 
 use ClickSend\Api\PostLetterApi;
-use ClickSend\Configuration;
 use ClickSend\Model\PostLetter;
 use ClickSend\Model\PostRecipient;
-use Dotenv\Dotenv;
 use Exception;
-use GuzzleHttp\Client;
 
 class SendMail
 {
@@ -48,6 +45,7 @@ class SendMail
         return $this->apiInstance->postLettersSendPost($this->postLetter);
     }
 
+    /** @param string[] $recipient */
     private function validateRecipientFields(array $recipient): bool
     {
         return true;

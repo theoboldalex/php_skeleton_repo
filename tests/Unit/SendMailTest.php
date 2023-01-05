@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
 use App\SendMail;
 use ClickSend\Api\PostLetterApi;
 use ClickSend\Model\PostLetter;
 use ClickSend\Model\PostRecipient;
 use Generator;
+use PHPUnit\Framework\TestCase;
+
+use function file_get_contents;
+use function json_decode;
 
 class SendMailTest extends TestCase
 {
-    const LETTER_PATH = __DIR__ . '/../fixtures/letters/';
+    public const LETTER_PATH = __DIR__ . '/../fixtures/letters/';
 
     /** @dataProvider letterDataProvider */
     public function testSendingALetter(
@@ -22,9 +25,9 @@ class SendMailTest extends TestCase
         array $expected,
     ): void {
         // Arrange
-        $apiMock = $this->createMock(PostLetterApi::class);
+        $apiMock       = $this->createMock(PostLetterApi::class);
         $recipientMock = $this->createMock(PostRecipient::class);
-        $letterMock = $this->createMock(PostLetter::class);
+        $letterMock    = $this->createMock(PostLetter::class);
 
         $apiMock->expects($this->once())
             ->method('postLettersSendPost')
@@ -33,7 +36,7 @@ class SendMailTest extends TestCase
         // $sut = System Under Test aka the class/module we are isolating as a unit
         $sut = new SendMail(
             $apiMock,
-            $recipientMock, 
+            $recipientMock,
             $letterMock,
         );
 
@@ -66,7 +69,7 @@ class SendMailTest extends TestCase
                 'http_code' => 200,
                 'response_code' => 'SUCCESS',
                 'response_msg' => 'Letters queued for delivery.',
-            ]
+            ],
         ];
     }
 
@@ -75,4 +78,3 @@ class SendMailTest extends TestCase
         return file_get_contents(__DIR__ . '/fixtures/responses/send_letter_response.json');
     }
 }
-

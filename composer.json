@@ -13,5 +13,8 @@
         "psr-4": {
             "App\\": "tests"
         }
+    },
+    "require": {
+        "clicksend/clicksend-php": "^5.0"
     }
 }
